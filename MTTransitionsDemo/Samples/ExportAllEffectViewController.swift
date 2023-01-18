@@ -93,7 +93,7 @@ class ExportAllEffectViewController: UIViewController {
                                effect: MTTransition.Effect,
                                duration: CMTime,
                                completion: ((Bool) -> ())?) {
-        let name = "\(index)_" + effect.description
+        let name: String = String(format: "%03d_", index) + effect.description
         try? videoTransition.merge(videos,
                                    effect: effect,
                                    transitionDuration: duration) { [weak self] result in
