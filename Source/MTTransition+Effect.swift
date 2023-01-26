@@ -14,7 +14,7 @@ extension MTTransition {
     ///
     /// let transition = MTTransition.Effect.bounce.transition
     /// transition.shadowHeight = 0.02
-    public enum Effect: CaseIterable, CustomStringConvertible {
+    public enum Effect: CaseIterable, CustomStringConvertible, Codable {
         /// none transition applied
         case none
         case angular
