@@ -5,8 +5,12 @@ import PackageDescription
 let package = Package(
     name: "MTTransitions",
     platforms: [.iOS(.v11)],
-    products: [.library(name: "MTTransitions",
-                        targets: ["MTTransitions"]),
+    products: [
+        .library(
+            name: "MTTransitions",
+            type: .dynamic,
+            targets: ["MTTransitions"]
+        ),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
