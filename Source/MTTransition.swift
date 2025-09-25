@@ -65,7 +65,32 @@ public class MTTransition: NSObject, MTIUnaryFilter {
     
     var kernel: MTIRenderPipelineKernel {
         let vertexDescriptor = MTIFunctionDescriptor(name: MTIFilterPassthroughVertexFunctionName)
-        let fragmentDescriptor = MTIFunctionDescriptor(name: fragmentName, libraryURL: MTIDefaultLibraryURLForBundle(Bundle(for: MTTransition.self)))
+        
+        var libraryURL: URL? = nil
+        
+        // Try to find default.metallib inside the MTTransitions.framework bundle
+        if let frameworkURL = MTIDefaultLibraryURLForBundle(Bundle(for: MTTransition.self)) {
+            // Check if the file exists
+            if FileManager.default.fileExists(atPath: frameworkURL.path) {
+                // Use this URL if the file exists
+                libraryURL = frameworkURL
+            }
+        }
+        
+        // If not found in framework bundle, try the main app bundle
+        if libraryURL == nil {
+            // Look for default.metallib inside Bundle.main
+            if let mainURL = MTIDefaultLibraryURLForBundle(Bundle.main) {
+                // Check if the file exists
+                if FileManager.default.fileExists(atPath: mainURL.path) {
+                    // Use this URL if the file exists
+                    libraryURL = mainURL
+                }
+            }
+            // If still not found, libraryURL remains nil
+        }
+        
+        let fragmentDescriptor = MTIFunctionDescriptor(name: fragmentName, libraryURL: libraryURL)
         let kernel = MTIRenderPipelineKernel(vertexFunctionDescriptor: vertexDescriptor, fragmentFunctionDescriptor: fragmentDescriptor)
         return kernel
     }
