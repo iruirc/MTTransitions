@@ -8,6 +8,10 @@ let package = Package(
     products: [
         .library(
             name: "MTTransitions",
+            targets: ["MTTransitions"]
+        ),
+        .library(
+            name: "MTTransitions-Dynamic",
             type: .dynamic,
             targets: ["MTTransitions"]
         ),
