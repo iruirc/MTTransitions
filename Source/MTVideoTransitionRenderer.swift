@@ -39,6 +39,9 @@ public class MTVideoTransitionRenderer: NSObject {
     }
 }
 
+#if canImport(UIKit)
+import UIKit
+
 extension UIImage {
     public convenience init?(pixelBuffer: CVPixelBuffer) {
         var cgImage: CGImage?
@@ -49,3 +52,4 @@ extension UIImage {
         self.init(cgImage: image)
     }
 }
+#endif

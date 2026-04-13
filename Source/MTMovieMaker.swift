@@ -8,6 +8,9 @@
 import Foundation
 import AVFoundation
 import MetalPetal
+#if canImport(UIKit)
+import UIKit
+#endif
 
 public enum MTMovieMakerError: Error {
     case imagesMustMoreThanTwo
@@ -59,6 +62,7 @@ public class MTMovieMaker: NSObject {
                         completion: completion)
     }
     
+    #if canImport(UIKit)
     /// Create video from images.
     /// - Parameters:
     ///   - images: The input images. Should be same width and height.
@@ -86,6 +90,7 @@ public class MTMovieMaker: NSObject {
                         audioURL: audioURL,
                         completion: completion)
     }
+    #endif
     
     /// Create video from images.
     /// - Parameters:
