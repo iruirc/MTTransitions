@@ -34,7 +34,9 @@ public class MTTransition: NSObject, MTIUnaryFilter {
     var completion: MTTransitionCompletion?
     
     private var updater: MTTransitionUpdater?
+    #if canImport(UIKit)
     private weak var driver: CADisplayLink?
+    #endif
     private var startTime: TimeInterval?
     
     // Subclasses must provide fragmentName
@@ -115,11 +117,24 @@ public class MTTransition: NSObject, MTIUnaryFilter {
         self.updater = updater
         self.completion = completion
         self.startTime = nil
+        #if canImport(UIKit)
         let driver = CADisplayLink(target: self, selector: #selector(render(sender:)))
         driver.add(to: .main, forMode: .common)
         self.driver = driver
+        #else
+        // macOS: no CADisplayLink-driven live preview loop.
+        // Emit final frame immediately and complete — VSDC uses the offline
+        // MTVideoTransitionRenderer path, this interactive API is not used.
+        self.progress = 1.0
+        if let image = outputImage {
+            updater(image)
+        }
+        completion?(true)
+        self.completion = nil
+        #endif
     }
     
+    #if canImport(UIKit)
     @objc private func render(sender: CADisplayLink) {
         let startTime: CFTimeInterval
         if let time = self.startTime {
@@ -148,6 +163,7 @@ public class MTTransition: NSObject, MTIUnaryFilter {
             self.updater?(image)
         }
     }
+    #endif
     
     public func cancel() {
         self.completion?(false)

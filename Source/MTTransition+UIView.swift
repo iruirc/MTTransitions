@@ -5,8 +5,10 @@
 //  Created by endanke on 2020/3/24.
 //
 
+#if canImport(UIKit)
 import Foundation
 import MetalPetal
+import UIKit
 
 /// Make Transtion with UIView
 extension MTTransition {
@@ -88,3 +90,4 @@ extension MTTransition {
         view.layer.sublayers?.removeAll(where: { $0.name == transitionLayerName })
     }
 }
+#endif

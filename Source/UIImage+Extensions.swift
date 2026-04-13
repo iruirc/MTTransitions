@@ -5,6 +5,7 @@
 //  Created by alexiscn on 2020/3/22.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 // Based on: https://stackoverflow.com/a/29552143
@@ -31,3 +32,4 @@ extension UIImage {
         return scaledImage
     }
 }
+#endif

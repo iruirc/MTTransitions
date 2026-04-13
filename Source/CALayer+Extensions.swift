@@ -5,6 +5,7 @@
 //  Created by alexiscn on 2020/3/22.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 extension CALayer {
@@ -19,3 +20,4 @@ extension CALayer {
         }
     }
 }
+#endif

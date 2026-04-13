@@ -5,8 +5,10 @@
 //  Created by alexiscn on 2020/3/22.
 //
 
+#if canImport(UIKit)
 import Foundation
 import MetalPetal
+import UIKit
 
 public final class MTViewControllerTransition: NSObject, UIViewControllerAnimatedTransitioning {
     
@@ -73,3 +75,4 @@ public final class MTViewControllerTransition: NSObject, UIViewControllerAnimate
         self.transition.duration = duration
     }
 }
+#endif
