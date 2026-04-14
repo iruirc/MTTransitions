@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "MTTransitions",
     defaultLocalization: "en",
-    platforms: [.iOS(.v11), .macOS(.v12)],
+    platforms: [.iOS(.v12), .macOS(.v12)],
     products: [
         .library(
             name: "MTTransitions",
@@ -19,7 +19,7 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "git@github.com:iosflashintegro/MetalPetal.git", .exact("1.25.2-VSDC.2")),
+        .package(url: "git@github.com:iosflashintegro/MetalPetal.git", exact: "1.25.2-VSDC.2"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
