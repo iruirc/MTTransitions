@@ -97,8 +97,12 @@ public class MTTransition: NSObject, MTIUnaryFilter {
         return kernel
     }
     
-    private func samplerImage(name: String) -> MTIImage? {
+    internal func samplerImage(name: String) -> MTIImage? {
+        #if SWIFT_PACKAGE
+        let bundle = Bundle.module
+        #else
         let bundle = Bundle(for: MTTransition.self)
+        #endif
         guard let bundleUrl = bundle.url(forResource: "Assets", withExtension: "bundle"),
             let resourceBundle = Bundle(url: bundleUrl) else {
             return nil

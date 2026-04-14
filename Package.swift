@@ -125,7 +125,15 @@ let package = Package(
                     "Transitions/MTWipeRightTransition.metal",
                     "Transitions/MTWipeUpTransition.metal",
                     "Transitions/MTZoomInCirclesTransition.metal"
-                ])
+                ],
+                resources: [
+                    .copy("Assets.bundle")
+                ]),
+        .testTarget(
+            name: "MTTransitionsTests",
+            dependencies: ["MTTransitions"],
+            path: "Tests/MTTransitionsTests"
+        )
     ],
     swiftLanguageVersions: [.v5]
 )
